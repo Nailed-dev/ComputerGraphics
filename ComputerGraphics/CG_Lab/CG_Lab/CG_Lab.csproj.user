@@ -16,6 +16,12 @@
     <Compile Update="Lab1\MatrixCalculate.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Lab1\OlegDubrov.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Lab1\RomanPopov.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

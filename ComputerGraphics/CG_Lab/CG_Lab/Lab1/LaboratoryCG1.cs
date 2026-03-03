@@ -44,6 +44,18 @@ namespace CG_Lab.Lab1
             artemZemlyanskiy.Show();
         }
 
+        private void Oleg_Click(object sender, EventArgs e)
+        {
+            OlegDubrov olegDubrov = new OlegDubrov();
+            olegDubrov.Show();
+        }
+
+        private void Roman_Click(object sender, EventArgs e)
+        {
+            RomanPopov romanPopov = new RomanPopov();
+            romanPopov.Show();
+        }
+
 
     }
 }

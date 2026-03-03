@@ -58,6 +58,7 @@
             button1.TabIndex = 4;
             button1.Text = "Oleg";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += Oleg_Click;
             // 
             // RomanButton
             // 
@@ -67,6 +68,7 @@
             RomanButton.TabIndex = 3;
             RomanButton.Text = "Roman";
             RomanButton.UseVisualStyleBackColor = true;
+            RomanButton.Click += Roman_Click;
             // 
             // ArtemButton
             // 

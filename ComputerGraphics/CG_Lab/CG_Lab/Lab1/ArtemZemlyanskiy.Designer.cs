@@ -129,7 +129,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(955, 808);
+            ClientSize = new Size(1226, 808);
             Controls.Add(MultiplyButton);
             Controls.Add(ConstButton);
             Controls.Add(VectorButton);
@@ -140,7 +140,7 @@
             Controls.Add(textBox1);
             Controls.Add(label1);
             Name = "ArtemZemlyanskiy";
-            Text = "ArtemZemlyanskiy";
+            Text = "Транспонирование матрицы и умножение вектора на константу";
             Load += Form3_Load;
             ResumeLayout(false);
             PerformLayout();
