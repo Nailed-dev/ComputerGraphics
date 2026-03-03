@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
+using CG_Lab.Lab1;
 
 
 namespace CG_Lab.Lab1
@@ -31,7 +32,7 @@ namespace CG_Lab.Lab1
 
         bool flag2;
 
-        int dx = 40, dy = 20;
+        int dx = 70, dy = 50;
 
         InputValue
         form2 = null;
@@ -62,8 +63,8 @@ namespace CG_Lab.Lab1
                     MatrixText[i, j].Visible = true;
                 }
             }
-            form2.Width = 10 + n * dx + 20;
-            form2.Height = 10 + n * dy + form2.ButtonOK.Height + 50;
+            form2.Width = 20 + n * dx + 40;
+            form2.Height = 50 + n * dy + form2.ButtonOK.Height + 80;
 
             form2.ButtonOK.Left = 10;
             form2.ButtonOK.Top = 10 + n * dy + 10;
@@ -121,8 +122,8 @@ namespace CG_Lab.Lab1
                     MatrixText[i, j].Visible = true;
                 }
             }
-            form2.Width = 10 + n * dx + 20;
-            form2.Height = 10 + n * dy + form2.ButtonOK.Height + 50;
+            form2.Width = 20 + n * dx + 40;
+            form2.Height = 50 + n * dy + form2.ButtonOK.Height + 80;
 
             form2.ButtonOK.Left = 10;
             form2.ButtonOK.Top = 10 + n * dy + 10;

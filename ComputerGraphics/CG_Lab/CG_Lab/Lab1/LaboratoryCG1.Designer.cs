@@ -76,6 +76,7 @@
             ArtemButton.TabIndex = 2;
             ArtemButton.Text = "Artem";
             ArtemButton.UseVisualStyleBackColor = true;
+            ArtemButton.Click += Artem_Click;
             // 
             // AndreyButton
             // 
@@ -85,6 +86,7 @@
             AndreyButton.TabIndex = 1;
             AndreyButton.Text = "Andrey";
             AndreyButton.UseVisualStyleBackColor = true;
+            AndreyButton.Click += Andrey_Click;
             // 
             // MatrixCalculate
             // 

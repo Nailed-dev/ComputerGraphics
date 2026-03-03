@@ -32,5 +32,18 @@ namespace CG_Lab.Lab1
         {
 
         }
+
+        private void Andrey_Click(object sender, EventArgs e)
+        {
+            AndreySuchilin andreySuchilin = new AndreySuchilin();
+            andreySuchilin.Show();
+        }
+        private void Artem_Click(object sender, EventArgs e)
+        {
+            ArtemZemlyanskiy artemZemlyanskiy = new ArtemZemlyanskiy();
+            artemZemlyanskiy.Show();
+        }
+
+
     }
 }
