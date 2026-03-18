@@ -21,3 +21,5 @@ C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics\CG_Lab\CG_Lab\obj\Debug\net8.0-
 C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\CG_Lab.Lab1.ArtemZemlyanskiy.resources
 C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\CG_Lab.Lab1.OlegDubrov.resources
 C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\CG_Lab.Lab1.RomanPopov.resources
+C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\CG_Lab.Properties.Resources.resources
+C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\CG_Lab.Lab2.LaboratoryCG2.resources
