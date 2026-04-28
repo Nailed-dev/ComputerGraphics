@@ -5,16 +5,21 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CG_Lab.Lab3
 {
     public partial class LaboratoryCG3 : Form
     {
-        Vector3[] matrFigure;
-        int[,] matrFacets;
-        Matrix4x4 transformationMatrix;
+        Vector3[] matrFigure; // Матрица вершин шестигранника
+        int[,] matrFacets; // Матрица граней
+        Matrix4x4 transformationMatrix; // Матрица преобразований
 
+        // Параметры преобразований
         float scale = 1.0f;
         float rotateX = 0, rotateY = 0, rotateZ = 0;
         float translateX = 0, translateY = 0, translateZ = 0;
@@ -25,9 +30,6 @@ namespace CG_Lab.Lab3
         float animationSpeed = 1.0f;
         Color figureColor = Color.Red;
 
-        // Слои для раздельного хранения
-        Bitmap axesLayer = null;
-        Bitmap figureLayer = null;
 
         public LaboratoryCG3()
         {
@@ -65,33 +67,16 @@ namespace CG_Lab.Lab3
             };
         }
 
-        // Общий метод для отображения обоих слоёв
-        private void UpdatePictureBox()
-        {
-            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.White);
-
-            // Рисуем слои один поверх другого
-            if (axesLayer != null)
-                g.DrawImage(axesLayer, 0, 0);
-            if (figureLayer != null)
-                g.DrawImage(figureLayer, 0, 0);
-
-            g.Dispose();
-
-            if (pictureBox1.Image != null)
-                pictureBox1.Image.Dispose();
-            pictureBox1.Image = bmp;
-            pictureBox1.Invalidate();
-        }
-
-        // Рисует фигуру в свой слой
         private void DrawFigure()
         {
-            figureLayer = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(figureLayer);
-            g.Clear(Color.Transparent); // Прозрачный фон!
+            if (pictureBox1.Image == null)
+            {
+                pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            }
+
+            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            g.Clear(Color.White);
+            DrawAxes(g);
 
             UpdateTransformationMatrix();
 
@@ -102,41 +87,28 @@ namespace CG_Lab.Lab3
             }
 
             DrawFacesWithDepth(g, transformedVertices);
-            g.Dispose();
 
-            UpdatePictureBox();
+
+            pictureBox1.Invalidate();
         }
 
-        // Рисует оси в свой слой
-        private void DrawAxes()
-        {
-            axesLayer = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(axesLayer);
-            g.Clear(Color.Transparent); // Прозрачный фон!
-            DrawAxesLines(g);
-            g.Dispose();
 
-            UpdatePictureBox();
-        }
-
-        private void DrawAxesLines(Graphics g)
+        private void DrawAxes(Graphics g)
         {
             Pen axisPen = new Pen(Color.Red, 1);
 
-            // Ось X
             g.DrawLine(axisPen, centerX - 150, centerY, centerX + 150, centerY);
             g.DrawString("X", this.Font, Brushes.Red, centerX + 155, centerY - 10);
 
-            // Ось Y
             g.DrawLine(axisPen, centerX, centerY - 150, centerX, centerY + 150);
             g.DrawString("Y", this.Font, Brushes.Red, centerX - 15, centerY - 155);
 
-            // Ось Z
             g.DrawLine(axisPen, centerX - 100, centerY + 100, centerX + 100, centerY - 100);
             g.DrawString("Z", this.Font, Brushes.Red, centerX + 105, centerY - 105);
 
             axisPen.Dispose();
         }
+
 
         private void DrawFacesWithDepth(Graphics g, Vector3[] vertices)
         {
@@ -168,6 +140,46 @@ namespace CG_Lab.Lab3
             }
         }
 
+
+
+
+        private void RotationButton1_Click(object sender, EventArgs e)
+        {
+            rotateY += 5;
+            DrawFigure();
+        }
+
+
+        private void RotationButton2_Click(object sender, EventArgs e)
+        {
+            rotateY -= 5;
+            DrawFigure();
+        }
+        private void RotationButton3_Click(object sender, EventArgs e)
+        {
+            rotateX += 5;
+            DrawFigure();
+        }
+
+        private void RotationButton4_Click(object sender, EventArgs e)
+        {
+            rotateX -= 5;
+            DrawFigure();
+        }
+
+        private void RotationButton5_Click(object sender, EventArgs e)
+        {
+            rotateZ += 5;
+            DrawFigure();
+        }
+
+
+        private void RotationButton6_Click(object sender, EventArgs e)
+        {
+            rotateZ -= 5;
+            DrawFigure();
+        }
+
         private void UpdateTransformationMatrix()
         {
             Matrix4x4 scaleMat = Matrix4x4.CreateScale(scale);
@@ -184,14 +196,11 @@ namespace CG_Lab.Lab3
             transformationMatrix = scaleMat * rotateXMat * rotateYMat * rotateZMat * translateMat;
         }
 
+
+
         private void DrawFigureButton_Click(object sender, EventArgs e)
         {
             DrawFigure();
-        }
-
-        private void DrawAxesButton_Click(object sender, EventArgs e)
-        {
-            DrawAxes();
         }
 
         private void RightButton_Click(object sender, EventArgs e)
@@ -218,16 +227,45 @@ namespace CG_Lab.Lab3
             DrawFigure();
         }
 
+        private void MinusOZButton_Click(object obj, EventArgs e)
+        {
+            translateZ -= 0.1f;
+            DrawFigure();
+        }
+
+        private void PlusOZButton_Click(object sender, EventArgs e)
+        {
+            translateZ += 0.1f;
+            DrawFigure();
+        }
+
         private void StartButton_Click(object sender, EventArgs e)
         {
             isAnimating = !isAnimating;
             StartButton.Text = isAnimating ? "Стоп" : "Старт";
 
             if (isAnimating)
+            {
                 timer1.Start();
+            }
             else
+            {
                 timer1.Stop();
+            }
         }
+
+        private void ScaleUpButton_Click(object sender, EventArgs e)
+        {
+            scale += 0.1f;
+            DrawFigure();
+        }
+        private void ScaleDownButton_Click(object sender, EventArgs e)
+        {
+            scale = Math.Max(0.1f, scale - 0.1f);
+            DrawFigure();
+        }
+
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -236,5 +274,24 @@ namespace CG_Lab.Lab3
             rotateZ += animationSpeed * 0.3f;
             DrawFigure();
         }
+        private void StartPositionButton_Click(object sender, EventArgs e)
+        {
+            scale = 1.0f;
+            rotateX = rotateY = rotateZ = 0;
+            translateX = translateY = translateZ = 0;
+            DrawFigure();
+        }
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                Graphics g = Graphics.FromImage(pictureBox1.Image);
+                g.Clear(Color.White);
+                pictureBox1.Invalidate();
+            }
+
+        }
+
+        
     }
 }
