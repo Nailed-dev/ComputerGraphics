@@ -1,5 +1,6 @@
 using CG_Lab.Lab1;
 using CG_Lab.Lab2;
+using CG_Lab.Lab3;
 
 
 namespace CG_Lab
@@ -38,6 +39,17 @@ namespace CG_Lab
 
             this.Hide(); 
             lab2.Show();
+        }
+
+        private void LabButton3_Click(object sender, EventArgs e)
+        {
+            LaboratoryCG3 lab3 = new LaboratoryCG3();
+            lab3.FormClosed += (s, args) =>
+            {
+                this.Show();
+            };
+            this.Hide();
+            lab3.Show();
         }
 
 

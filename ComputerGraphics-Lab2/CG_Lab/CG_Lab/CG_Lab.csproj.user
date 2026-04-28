@@ -25,6 +25,9 @@
     <Compile Update="Lab2\LaboratoryCG2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Lab3\LaboratoryCG3.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
