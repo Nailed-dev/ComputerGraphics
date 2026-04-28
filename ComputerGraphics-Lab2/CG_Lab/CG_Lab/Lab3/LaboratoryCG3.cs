@@ -292,6 +292,22 @@ namespace CG_Lab.Lab3
 
         }
 
-        
+        private void ReflectXButton_Click(object sender, EventArgs e)
+        {
+            reflectX = !reflectX;
+            DrawFigure();
+        }
+
+        private void ReflectYButton_Click(object sender, EventArgs e)
+        {
+            reflectY = !reflectY;
+            DrawFigure();
+        }
+
+        private void ReflectZButton_Click(object sender, EventArgs e)
+        {
+            reflectZ = !reflectZ;
+            DrawFigure();
+        }
     }
 }

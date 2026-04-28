@@ -33,6 +33,13 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
+            ReflectZButton = new Button();
+            ReflectYButton = new Button();
+            ReflectXButton = new Button();
+            label4 = new Label();
+            ScaleDownButton = new Button();
+            ScaleUpButton = new Button();
+            label3 = new Label();
             StartButton = new Button();
             RotationButton6 = new Button();
             RotationButton5 = new Button();
@@ -86,6 +93,13 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(ReflectZButton);
+            panel1.Controls.Add(ReflectYButton);
+            panel1.Controls.Add(ReflectXButton);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(ScaleDownButton);
+            panel1.Controls.Add(ScaleUpButton);
+            panel1.Controls.Add(label3);
             panel1.Controls.Add(StartButton);
             panel1.Controls.Add(RotationButton6);
             panel1.Controls.Add(RotationButton5);
@@ -109,6 +123,78 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(753, 1142);
             panel1.TabIndex = 1;
+            // 
+            // ReflectZButton
+            // 
+            ReflectZButton.Location = new Point(432, 1002);
+            ReflectZButton.Name = "ReflectZButton";
+            ReflectZButton.Size = new Size(318, 70);
+            ReflectZButton.TabIndex = 24;
+            ReflectZButton.Text = "По оси Z";
+            ReflectZButton.UseVisualStyleBackColor = true;
+            ReflectZButton.Click += ReflectZButton_Click;
+            // 
+            // ReflectYButton
+            // 
+            ReflectYButton.Location = new Point(432, 926);
+            ReflectYButton.Name = "ReflectYButton";
+            ReflectYButton.Size = new Size(318, 70);
+            ReflectYButton.TabIndex = 23;
+            ReflectYButton.Text = "По оси Y";
+            ReflectYButton.UseVisualStyleBackColor = true;
+            ReflectYButton.Click += ReflectYButton_Click;
+            // 
+            // ReflectXButton
+            // 
+            ReflectXButton.Location = new Point(432, 850);
+            ReflectXButton.Name = "ReflectXButton";
+            ReflectXButton.Size = new Size(318, 70);
+            ReflectXButton.TabIndex = 22;
+            ReflectXButton.Text = "По оси X";
+            ReflectXButton.UseVisualStyleBackColor = true;
+            ReflectXButton.Click += ReflectXButton_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label4.Location = new Point(427, 773);
+            label4.Name = "label4";
+            label4.Size = new Size(323, 74);
+            label4.TabIndex = 21;
+            label4.Text = "Отражение";
+            // 
+            // ScaleDownButton
+            // 
+            ScaleDownButton.Font = new Font("Segoe UI", 26.1428585F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            ScaleDownButton.Location = new Point(588, 94);
+            ScaleDownButton.Name = "ScaleDownButton";
+            ScaleDownButton.Size = new Size(90, 90);
+            ScaleDownButton.TabIndex = 20;
+            ScaleDownButton.Text = "-";
+            ScaleDownButton.UseVisualStyleBackColor = true;
+            ScaleDownButton.Click += ScaleDownButton_Click;
+            // 
+            // ScaleUpButton
+            // 
+            ScaleUpButton.Font = new Font("Segoe UI", 26.1428585F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            ScaleUpButton.Location = new Point(492, 94);
+            ScaleUpButton.Name = "ScaleUpButton";
+            ScaleUpButton.Size = new Size(90, 90);
+            ScaleUpButton.TabIndex = 19;
+            ScaleUpButton.Text = "+";
+            ScaleUpButton.UseVisualStyleBackColor = true;
+            ScaleUpButton.Click += ScaleUpButton_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label3.Location = new Point(366, 91);
+            label3.Name = "label3";
+            label3.Size = new Size(132, 38);
+            label3.TabIndex = 18;
+            label3.Text = "Масштаб";
             // 
             // StartButton
             // 
@@ -262,7 +348,7 @@
             // 
             // ClearButton
             // 
-            ClearButton.Location = new Point(197, 94);
+            ClearButton.Location = new Point(25, 94);
             ClearButton.Name = "ClearButton";
             ClearButton.Size = new Size(318, 70);
             ClearButton.TabIndex = 2;
@@ -329,5 +415,12 @@
         private Button LeftButton;
         private Button RightButton;
         private Button StartButton;
+        private Button ScaleDownButton;
+        private Button ScaleUpButton;
+        private Label label3;
+        private Button ReflectZButton;
+        private Button ReflectYButton;
+        private Button ReflectXButton;
+        private Label label4;
     }
 }
