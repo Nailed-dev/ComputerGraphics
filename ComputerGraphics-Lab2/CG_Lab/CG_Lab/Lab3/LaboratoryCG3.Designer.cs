@@ -106,6 +106,7 @@
             UpButton.TabIndex = 7;
             UpButton.Text = "По оси ОУ вверх";
             UpButton.UseVisualStyleBackColor = true;
+            UpButton.Click += UpButton_Click;
             // 
             // DownButton
             // 
@@ -115,6 +116,7 @@
             DownButton.TabIndex = 6;
             DownButton.Text = "По оси ОУ вниз";
             DownButton.UseVisualStyleBackColor = true;
+            DownButton.Click += DownButton_Click;
             // 
             // LeftButton
             // 
@@ -124,6 +126,7 @@
             LeftButton.TabIndex = 5;
             LeftButton.Text = "По оси ОХ влево";
             LeftButton.UseVisualStyleBackColor = true;
+            LeftButton.Click += LeftButton_Click;
             // 
             // RightButton
             // 
@@ -153,7 +156,6 @@
             ClearButton.TabIndex = 2;
             ClearButton.Text = "Очистить";
             ClearButton.UseVisualStyleBackColor = true;
-            ClearButton.Click += ClearButton_Click;
             // 
             // DrawFigureButton
             // 
@@ -173,11 +175,11 @@
             DrawAxisButton.TabIndex = 0;
             DrawAxisButton.Text = "Нарисовать ОСИ";
             DrawAxisButton.UseVisualStyleBackColor = true;
-            DrawAxisButton.Click += DrawAxicButton_Click;
+            DrawAxisButton.Click += DrawAxesButton_Click;
             // 
             // timer1
             // 
-            timer1.Tick += timer1_Tick_1;
+            timer1.Tick += timer1_Tick;
             // 
             // LaboratoryCG3
             // 

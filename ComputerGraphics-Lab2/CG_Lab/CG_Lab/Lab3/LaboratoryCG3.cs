@@ -4,154 +4,237 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace CG_Lab.Lab3
 {
     public partial class LaboratoryCG3 : Form
     {
-        int[,] kv = new int[4, 3]; // матрица тела
-        int[,] osi = new int[4, 3]; // матрица координат осей
-        int[,] matr_sdv = new int[3, 3]; //матрица преобразования
+        Vector3[] matrFigure;
+        int[,] matrFacets;
+        Matrix4x4 transformationMatrix;
 
-        int k, l;
+        float scale = 1.0f;
+        float rotateX = 0, rotateY = 0, rotateZ = 0;
+        float translateX = 0, translateY = 0, translateZ = 0;
+        bool reflectX = false, reflectY = false, reflectZ = false;
+        float centerX, centerY;
 
-        bool f = false;
-        private void Init_kvadrat()
+        bool isAnimating = false;
+        float animationSpeed = 1.0f;
+        Color figureColor = Color.Red;
+
+        // Слои для раздельного хранения
+        Bitmap axesLayer = null;
+        Bitmap figureLayer = null;
+
+        public LaboratoryCG3()
         {
-            kv[0, 0] = -50;  kv[0, 1] = 0;   kv[0, 2] = 1;
-            kv[1, 0] = 0;    kv[1, 1] = 50;  kv[1, 2] = 1;
-            kv[2, 0] = 50;   kv[2, 1] = 0;   kv[2, 2] = 1;
-            kv[3, 0] = 0;    kv[3, 1] = -50; kv[3, 2] = 1;
+            InitializeComponent();
+
+            centerX = pictureBox1.Width / 2;
+            centerY = pictureBox1.Height / 2;
+
+            InitializeFigure();
+            transformationMatrix = Matrix4x4.Identity;
         }
-        
-        private void Init_matr_preob(int k1, int l1)
-        {
-            matr_sdv[0,0] = 1;  matr_sdv[0,1] = 0;       matr_sdv[0,2] = 0;
-            matr_sdv[1,0] = 0;  matr_sdv[1,1] = 1;       matr_sdv[1,2] = 0;
-            matr_sdv[2,0] = k1;  matr_sdv[2,1] = l1;     matr_sdv[2,2] = 1;
-        }
 
-        private void Init_osi()
+        private void InitializeFigure()
         {
-            osi[0, 0] = -200;   osi[0, 1] = 0;      osi[0, 2] = 1;
-            osi[1, 0] = 200;    osi[1, 1] = 0;      osi[1, 2] = 1;
-            osi[2, 0] = 0;      osi[2, 1] = 200;    osi[2, 2] = 1;
-            osi[3, 0] = 0;      osi[3, 1] = -200;   osi[3, 2] = 1;
-        }
-
-        private int[,] Multiply_matr(int[,] a, int[,] b)
-        {
-            int n = a.GetLength(0);
-            int m = a.GetLength(1);
-
-            int[,] r=new int[n, m];
-            for (int i = 0; i < n; i++)
+            matrFigure = new Vector3[]
             {
-                for (int j = 0; j < m; j++)
-                {
-                    r[i, j] = 0;
-                    for (int ii = 0; ii < m; ii++)
-                    {
-                        r[i, j] += a[i, ii] * b[ii, j];
-                    }
-                }
-            }
-            return r;
+                new Vector3(0, 1, 0),
+                new Vector3(1, 0, 0),
+                new Vector3(0, 0, 1),
+                new Vector3(-1, 0, 0),
+                new Vector3(0, 0, -1),
+                new Vector3(0, -1, 0)
+            };
+
+            matrFacets = new int[,]
+            {
+                {0, 1, 2},
+                {0, 2, 3},
+                {0, 3, 4},
+                {0, 4, 1},
+                {5, 2, 1},
+                {5, 3, 2},
+                {5, 4, 3},
+                {5, 1, 4}
+            };
         }
 
-        private void Draw_Kv()
+        // Общий метод для отображения обоих слоёв
+        private void UpdatePictureBox()
         {
-            Init_kvadrat();
-            Init_matr_preob(k, l);
-            int[,] kv1 = Multiply_matr(kv, matr_sdv);
+            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
 
-            Pen myPen = new Pen(Color.Blue, 2);
+            // Рисуем слои один поверх другого
+            if (axesLayer != null)
+                g.DrawImage(axesLayer, 0, 0);
+            if (figureLayer != null)
+                g.DrawImage(figureLayer, 0, 0);
 
-            Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
-            g.DrawLine(myPen, kv1[0, 0], kv1[0, 1], kv1[1, 0], kv1[1, 1]);
-            // рисуем 2 сторону квадрата
-            g.DrawLine(myPen, kv1[1, 0], kv1[1, 1], kv1[2, 0], kv1[2, 1]);
-            // рисуем 3 сторону квадрата
-            g.DrawLine(myPen, kv1[2, 0], kv1[2, 1], kv1[3, 0], kv1[3, 1]);
-            // рисуем 4 сторону квадрата
-            g.DrawLine(myPen, kv1[3, 0], kv1[3, 1], kv1[0, 0], kv1[0, 1]);
-            g.Dispose();// освобождаем все ресурсы, связанные с отрисовкой
-            myPen.Dispose(); //освобождвем ресурсы, связанные с Pen
+            g.Dispose();
 
+            if (pictureBox1.Image != null)
+                pictureBox1.Image.Dispose();
+            pictureBox1.Image = bmp;
+            pictureBox1.Invalidate();
+        }
+
+        // Рисует фигуру в свой слой
+        private void DrawFigure()
+        {
+            figureLayer = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(figureLayer);
+            g.Clear(Color.Transparent); // Прозрачный фон!
+
+            UpdateTransformationMatrix();
+
+            Vector3[] transformedVertices = new Vector3[matrFigure.Length];
+            for (int i = 0; i < matrFigure.Length; i++)
+            {
+                transformedVertices[i] = Vector3.Transform(matrFigure[i], transformationMatrix);
+            }
+
+            DrawFacesWithDepth(g, transformedVertices);
+            g.Dispose();
+
+            UpdatePictureBox();
+        }
+
+        // Рисует оси в свой слой
+        private void DrawAxes()
+        {
+            axesLayer = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(axesLayer);
+            g.Clear(Color.Transparent); // Прозрачный фон!
+            DrawAxesLines(g);
+            g.Dispose();
+
+            UpdatePictureBox();
+        }
+
+        private void DrawAxesLines(Graphics g)
+        {
+            Pen axisPen = new Pen(Color.Red, 1);
+
+            // Ось X
+            g.DrawLine(axisPen, centerX - 150, centerY, centerX + 150, centerY);
+            g.DrawString("X", this.Font, Brushes.Red, centerX + 155, centerY - 10);
+
+            // Ось Y
+            g.DrawLine(axisPen, centerX, centerY - 150, centerX, centerY + 150);
+            g.DrawString("Y", this.Font, Brushes.Red, centerX - 15, centerY - 155);
+
+            // Ось Z
+            g.DrawLine(axisPen, centerX - 100, centerY + 100, centerX + 100, centerY - 100);
+            g.DrawString("Z", this.Font, Brushes.Red, centerX + 105, centerY - 105);
+
+            axisPen.Dispose();
+        }
+
+        private void DrawFacesWithDepth(Graphics g, Vector3[] vertices)
+        {
+            var faceDepths = new List<Tuple<int, float>>();
+            for (int i = 0; i < matrFacets.GetLength(0); i++)
+            {
+                float avgZ = (vertices[matrFacets[i, 0]].Z
+                    + vertices[matrFacets[i, 1]].Z
+                    + vertices[matrFacets[i, 2]].Z) / 3;
+                faceDepths.Add(Tuple.Create(i, avgZ));
+            }
+
+            var sortedFaces = faceDepths.OrderByDescending(f => f.Item2).ToList();
+
+            foreach (var face in sortedFaces)
+            {
+                int faceIndex = face.Item1;
+                PointF[] points = new PointF[3];
+                for (int j = 0; j < 3; j++)
+                {
+                    float zFactor = 1 + vertices[matrFacets[faceIndex, j]].Z * 0.1f + translateZ * 0.1f;
+                    points[j] = new PointF(
+                        centerX + vertices[matrFacets[faceIndex, j]].X * 50 * scale * zFactor,
+                        centerY - vertices[matrFacets[faceIndex, j]].Y * 50 * scale * zFactor);
+                }
+
+                Pen pen = new Pen(figureColor, 2);
+                g.DrawPolygon(pen, points);
+            }
+        }
+
+        private void UpdateTransformationMatrix()
+        {
+            Matrix4x4 scaleMat = Matrix4x4.CreateScale(scale);
+
+            if (reflectX) scaleMat *= Matrix4x4.CreateScale(-1, 1, 1);
+            if (reflectY) scaleMat *= Matrix4x4.CreateScale(1, -1, 1);
+            if (reflectZ) scaleMat *= Matrix4x4.CreateScale(1, 1, -1);
+
+            Matrix4x4 rotateXMat = Matrix4x4.CreateRotationX(rotateX * (float)Math.PI / 180);
+            Matrix4x4 rotateYMat = Matrix4x4.CreateRotationY(rotateY * (float)Math.PI / 180);
+            Matrix4x4 rotateZMat = Matrix4x4.CreateRotationZ(rotateZ * (float)Math.PI / 180);
+            Matrix4x4 translateMat = Matrix4x4.CreateTranslation(translateX, translateY, translateZ);
+
+            transformationMatrix = scaleMat * rotateXMat * rotateYMat * rotateZMat * translateMat;
         }
 
         private void DrawFigureButton_Click(object sender, EventArgs e)
         {
-            k = pictureBox1.Width / 2;
-            l = pictureBox1.Height / 2;  
-
-            Draw_Kv();
-
+            DrawFigure();
         }
 
-        private void Draw_osi()
+        private void DrawAxesButton_Click(object sender, EventArgs e)
         {
-            Init_osi();
-            Init_matr_preob(k, l);
-            int[,] osi1 = Multiply_matr(osi, matr_sdv);
-            Pen myPen = new Pen(Color.Red, 1);// цвет линии и ширина
-            Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
-            // рисуем ось ОХ
-            g.DrawLine(myPen, osi1[0, 0], osi1[0, 1], osi1[1, 0], osi1[1,1]);
-            // рисуем ось ОУ
-            g.DrawLine(myPen, osi1[2, 0], osi1[2, 1], osi1[3, 0], osi1[3,1]);
-            g.Dispose();
-            myPen.Dispose();
-        }
-        private void DrawAxicButton_Click(object sender, EventArgs e)
-        {
-            k = pictureBox1.Width / 2;
-            l = pictureBox1.Height / 2;
-            Draw_osi();
+            DrawAxes();
         }
 
         private void RightButton_Click(object sender, EventArgs e)
         {
-            k += 5; //изменение соответсвующего элемента матрицы сдвига
-            Draw_Kv(); // вывод квадратика
+            translateX += 0.1f;
+            DrawFigure();
         }
 
+        private void LeftButton_Click(object sender, EventArgs e)
+        {
+            translateX -= 0.1f;
+            DrawFigure();
+        }
+
+        private void DownButton_Click(Object sender, EventArgs e)
+        {
+            translateY -= 0.1f;
+            DrawFigure();
+        }
+
+        private void UpButton_Click(object sender, EventArgs e)
+        {
+            translateY += 0.1f;
+            DrawFigure();
+        }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            timer1.Interval = 100;
-            StartButton.Text = "Стоп";
-            if (f == true)
+            isAnimating = !isAnimating;
+            StartButton.Text = isAnimating ? "Стоп" : "Старт";
+
+            if (isAnimating)
                 timer1.Start();
             else
-            {
                 timer1.Stop();
-                StartButton.Text = "Старт";
-
-            }
-            f = !f;
-
         }
 
-        private void timer1_Tick_1(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            k++;
-            Draw_Kv();
-            Thread.Sleep(100);
-        }
-
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
-            g.Clear(pictureBox1.BackColor);
-            g.Dispose();
-        }
-        public LaboratoryCG3()
-        {
-            InitializeComponent();
+            rotateX += animationSpeed;
+            rotateY += animationSpeed * 0.7f;
+            rotateZ += animationSpeed * 0.3f;
+            DrawFigure();
         }
     }
 }
