@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CG_Lab.Lab1;
 using CG_Lab.Lab3;
+using WindowsFormsApp1;
 
 namespace CG_Lab.Lab3
 {
@@ -33,7 +34,14 @@ namespace CG_Lab.Lab3
         
         private void BicycleButton_Click(Object sender, EventArgs e)
         {
-           
+            Bicycle bicycle = new Bicycle();
+            bicycle.Show();
+        }
+
+        private void PlaneButton_Click(object sender, EventArgs e)
+        {
+            PaperPlane.Plane plane = new PaperPlane.Plane();
+            plane.Show();
         }
     }
 }

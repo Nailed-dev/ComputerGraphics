@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            PlaneButton = new Button();
+            BicycleButton = new Button();
             CosmosButton = new Button();
             MainLabButton = new Button();
-            BicycleButton = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(PlaneButton);
             panel1.Controls.Add(BicycleButton);
             panel1.Controls.Add(CosmosButton);
             panel1.Controls.Add(MainLabButton);
@@ -45,6 +47,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1248, 759);
             panel1.TabIndex = 0;
+            // 
+            // PlaneButton
+            // 
+            PlaneButton.Location = new Point(119, 428);
+            PlaneButton.Name = "PlaneButton";
+            PlaneButton.Size = new Size(376, 110);
+            PlaneButton.TabIndex = 4;
+            PlaneButton.Text = "Самолетик";
+            PlaneButton.UseVisualStyleBackColor = true;
+            PlaneButton.Click += PlaneButton_Click;
+            // 
+            // BicycleButton
+            // 
+            BicycleButton.Location = new Point(787, 223);
+            BicycleButton.Name = "BicycleButton";
+            BicycleButton.Size = new Size(376, 110);
+            BicycleButton.TabIndex = 3;
+            BicycleButton.Text = "Велосипед";
+            BicycleButton.UseVisualStyleBackColor = true;
+            BicycleButton.Click += BicycleButton_Click;
             // 
             // CosmosButton
             // 
@@ -66,15 +88,6 @@
             MainLabButton.UseVisualStyleBackColor = true;
             MainLabButton.Click += MainLabButton_Click;
             // 
-            // BicycleButton
-            // 
-            BicycleButton.Location = new Point(751, 223);
-            BicycleButton.Name = "BicycleButton";
-            BicycleButton.Size = new Size(333, 110);
-            BicycleButton.TabIndex = 2;
-            BicycleButton.Text = "Велосипед";
-            BicycleButton.UseVisualStyleBackColor = true;
-            // 
             // Lab3Choice
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
@@ -93,5 +106,6 @@
         private Button MainLabButton;
         private Button CosmosButton;
         private Button BicycleButton;
+        private Button PlaneButton;
     }
 }
