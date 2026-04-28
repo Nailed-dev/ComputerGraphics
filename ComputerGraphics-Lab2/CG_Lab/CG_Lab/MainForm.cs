@@ -43,7 +43,7 @@ namespace CG_Lab
 
         private void LabButton3_Click(object sender, EventArgs e)
         {
-            LaboratoryCG3 lab3 = new LaboratoryCG3();
+            Lab3Choice lab3 = new Lab3Choice();
             lab3.FormClosed += (s, args) =>
             {
                 this.Show();

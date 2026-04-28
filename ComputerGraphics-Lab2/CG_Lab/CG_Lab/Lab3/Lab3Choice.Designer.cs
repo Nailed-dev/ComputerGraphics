@@ -1,0 +1,97 @@
+﻿namespace CG_Lab.Lab3
+{
+    partial class Lab3Choice
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            panel1 = new Panel();
+            CosmosButton = new Button();
+            MainLabButton = new Button();
+            BicycleButton = new Button();
+            panel1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(BicycleButton);
+            panel1.Controls.Add(CosmosButton);
+            panel1.Controls.Add(MainLabButton);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1248, 759);
+            panel1.TabIndex = 0;
+            // 
+            // CosmosButton
+            // 
+            CosmosButton.Location = new Point(119, 223);
+            CosmosButton.Name = "CosmosButton";
+            CosmosButton.Size = new Size(376, 110);
+            CosmosButton.TabIndex = 1;
+            CosmosButton.Text = "Космический корабль";
+            CosmosButton.UseVisualStyleBackColor = true;
+            CosmosButton.Click += CosmosButton_Click;
+            // 
+            // MainLabButton
+            // 
+            MainLabButton.Location = new Point(414, 50);
+            MainLabButton.Name = "MainLabButton";
+            MainLabButton.Size = new Size(376, 110);
+            MainLabButton.TabIndex = 0;
+            MainLabButton.Text = "Основная лабараторная работа";
+            MainLabButton.UseVisualStyleBackColor = true;
+            MainLabButton.Click += MainLabButton_Click;
+            // 
+            // BicycleButton
+            // 
+            BicycleButton.Location = new Point(751, 223);
+            BicycleButton.Name = "BicycleButton";
+            BicycleButton.Size = new Size(333, 110);
+            BicycleButton.TabIndex = 2;
+            BicycleButton.Text = "Велосипед";
+            BicycleButton.UseVisualStyleBackColor = true;
+            // 
+            // Lab3Choice
+            // 
+            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1248, 759);
+            Controls.Add(panel1);
+            Name = "Lab3Choice";
+            Text = "Lab3Choice";
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private Panel panel1;
+        private Button MainLabButton;
+        private Button CosmosButton;
+        private Button BicycleButton;
+    }
+}
