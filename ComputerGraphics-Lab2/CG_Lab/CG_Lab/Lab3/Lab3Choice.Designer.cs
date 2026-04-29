@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            BoatButton = new Button();
             PlaneButton = new Button();
             BicycleButton = new Button();
             CosmosButton = new Button();
@@ -38,6 +39,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(BoatButton);
             panel1.Controls.Add(PlaneButton);
             panel1.Controls.Add(BicycleButton);
             panel1.Controls.Add(CosmosButton);
@@ -47,6 +49,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1248, 759);
             panel1.TabIndex = 0;
+            // 
+            // BoatButton
+            // 
+            BoatButton.Location = new Point(787, 428);
+            BoatButton.Name = "BoatButton";
+            BoatButton.Size = new Size(376, 110);
+            BoatButton.TabIndex = 5;
+            BoatButton.Text = "Лодка";
+            BoatButton.UseVisualStyleBackColor = true;
+            BoatButton.Click += BoatButton_Click;
             // 
             // PlaneButton
             // 
@@ -107,5 +119,6 @@
         private Button CosmosButton;
         private Button BicycleButton;
         private Button PlaneButton;
+        private Button BoatButton;
     }
 }

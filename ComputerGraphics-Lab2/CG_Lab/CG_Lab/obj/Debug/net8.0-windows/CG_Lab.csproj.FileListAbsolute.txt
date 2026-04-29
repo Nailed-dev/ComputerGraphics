@@ -103,3 +103,4 @@ C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics-Lab2\CG_Lab\CG_Lab\obj\Debug\ne
 C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics-Lab2\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\cosmos.Cosmos.resources
 C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics-Lab2\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\WindowsFormsApp1.Bicycle.resources
 C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics-Lab2\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\PaperPlane.Plane.resources
+C:\Users\Redmi\OneDrive\Desktop\ComputerGraphics-Lab2\CG_Lab\CG_Lab\obj\Debug\net8.0-windows\Lab3_SailboatSeagull.Boat.resources

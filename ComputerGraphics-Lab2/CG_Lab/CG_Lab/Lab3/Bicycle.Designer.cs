@@ -28,38 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            timer1 = new System.Windows.Forms.Timer(components);
+            button1 = new Button();
+            SuspendLayout();
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 20;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            timer1.Enabled = true;
+            timer1.Interval = 20;
+            timer1.Tick += timer1_Tick;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(594, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Тандем / Обычный";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(1188, 62);
+            button1.Margin = new Padding(6, 7, 6, 7);
+            button1.Name = "button1";
+            button1.Size = new Size(252, 53);
+            button1.TabIndex = 0;
+            button1.Text = "Тандем / Обычный";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // Form1
+            // Bicycle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 361);
-            this.Controls.Add(this.button1);
-            this.DoubleBuffered = true;
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1568, 833);
+            Controls.Add(button1);
+            DoubleBuffered = true;
+            Margin = new Padding(6, 7, 6, 7);
+            Name = "Bicycle";
+            Text = "Form1";
+            Load += Bicycle_Load;
+            Paint += Form1_Paint;
+            ResumeLayout(false);
 
         }
 

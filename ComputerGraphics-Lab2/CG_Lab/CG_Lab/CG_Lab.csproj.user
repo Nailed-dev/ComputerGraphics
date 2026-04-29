@@ -28,6 +28,9 @@
     <Compile Update="Lab3\Bicycle.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Lab3\Boat.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Lab3\Cosmos.cs">
       <SubType>Form</SubType>
     </Compile>

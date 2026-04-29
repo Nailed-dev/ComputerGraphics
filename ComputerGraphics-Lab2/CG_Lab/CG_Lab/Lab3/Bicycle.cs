@@ -42,16 +42,21 @@ namespace WindowsFormsApp1
             float frontWheelX = isTandem ? bikeX + wheelDistance * 2 : bikeX + wheelDistance;
             DrawWheel(g, wheelPen, frontWheelX, wheelY, wheelRadius);
 
+            //отрисовка земли
+            g.DrawLine(framePen, bikeX - 1000, wheelY + 30, bikeX + 2000, wheelY + 30);
+
             // 3. Рисуем раму
             // Задняя часть
             g.DrawLine(framePen, bikeX, wheelY, bikeX + 30, wheelY - 50); // К сиденью 1
             g.DrawLine(framePen, bikeX, wheelY, bikeX + 50, wheelY);      // К педалям 1
+            g.DrawLine(framePen, bikeX + 50, wheelY, bikeX + 100, wheelY);
+            g.DrawLine(framePen, bikeX + 30, wheelY - 50, bikeX + 84, wheelY - 50);
 
             if (isTandem)
             {
                 // Рама тандема (соединяем секции)
-                g.DrawLine(framePen, bikeX + 50, wheelY, bikeX + 150, wheelY);
-                g.DrawLine(framePen, bikeX + 30, wheelY - 50, bikeX + 130, wheelY - 50);
+                g.DrawLine(framePen, bikeX + 50, wheelY, bikeX + 200, wheelY);
+                g.DrawLine(framePen, bikeX + 30, wheelY - 50, bikeX + 184, wheelY - 50);
                 // Второе сиденье и педали
                 DrawPedals(g, bikeX + 150, wheelY, 15);
             }
@@ -102,6 +107,11 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             isTandem = !isTandem; // Переключаем состояние
+        }
+
+        private void Bicycle_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

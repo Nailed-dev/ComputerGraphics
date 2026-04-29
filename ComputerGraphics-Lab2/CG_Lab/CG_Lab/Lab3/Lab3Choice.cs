@@ -43,5 +43,11 @@ namespace CG_Lab.Lab3
             PaperPlane.Plane plane = new PaperPlane.Plane();
             plane.Show();
         }
+
+        private void BoatButton_Click(object sender, EventArgs e)
+        {
+            Lab3_SailboatSeagull.Boat boat = new Lab3_SailboatSeagull.Boat();
+            boat.Show();
+        }
     }
 }
